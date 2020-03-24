@@ -18,11 +18,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     This class is an implementation of the RecyclerView Adapter that allows the contact list to be shown in the recyclerview
      */
 
+    //TODO: Set click listeners for the rest of the textview objects
+    //TODO: Change the image that is displayed based on what was clicked
+
     private ArrayList<Key_MM> keysMM;
     private ArrayList<String> numStrings;
     //private ArrayList<Contact> contacts;
     private Context context;
     //private ContactIO io;
+    private String mAccNum, mAccType, mMajor, mMinor;
 
     //constructor
     RecyclerAdapter(ArrayList<Key_MM> byMM, Context context){
@@ -43,25 +47,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.accNum.setText(keysMM.get(position).accNum);
-        holder.accType.setText(keysMM.get(position).accType);
-        holder.majorKeyLetter.setText(keysMM.get(position).majorKey);
-        holder.minorKeyLetter.setText(keysMM.get(position).minorKey);
+        mAccNum = keysMM.get(position).accNum;
+        mAccType = keysMM.get(position).accType;
+        mMajor = keysMM.get(position).majorKey;
+        mMinor = keysMM.get(position).minorKey;
 
-        final int currentPos = holder.getAdapterPosition();
+        holder.accNum.setText(mAccNum);
+        holder.accType.setText(mAccType);
+        holder.majorKeyLetter.setText(mMajor);
+        holder.minorKeyLetter.setText(mMinor);
 
-        /*setOnClick(firstField,view);
-        setOnClick(secondField,view);
-        setOnClick(major,view);
-        setOnClick(minor,view);*/
+        int currentPos = holder.getAdapterPosition();
 
-        holder.accNum.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context,ImageActivity.class);
-                context.startActivity(intent);
-            }
-        });
+        setOnClick(holder.majorKeyLetter, true, currentPos);
+        setOnClick(holder.minorKeyLetter,false, currentPos);
 
     }
 
@@ -88,5 +87,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             majorKeyLetter = itemView.findViewById(R.id.majorKeyLetter);
             minorKeyLetter = itemView.findViewById(R.id.minorKeyLetter);
         }
+    }
+
+    private void setOnClick(TextView tv, final boolean isMajor, final int currentPos){
+
+        tv.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,ImageActivity.class);
+                intent.putExtra("key",keysMM);
+                intent.putExtra("pos",currentPos);
+                intent.putExtra("isMajor", isMajor);
+                context.startActivity(intent);
+            }
+        });
     }
 }
