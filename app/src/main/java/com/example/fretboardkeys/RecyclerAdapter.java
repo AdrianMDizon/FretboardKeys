@@ -1,6 +1,7 @@
 package com.example.fretboardkeys;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     //private ContactIO io;
 
     //constructor
-    RecyclerAdapter(ArrayList<Key_MM> byMM){
+    RecyclerAdapter(ArrayList<Key_MM> byMM, Context context){
         this.keysMM = byMM;
         //this.contacts = contacts;
+        this.context = context;
         //this.io = io;
     }
 
@@ -48,19 +50,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         final int currentPos = holder.getAdapterPosition();
 
-        //when a contact name is clicked, sends the user to view the contact details (new activity)
-        holder.listLayout.setOnClickListener(new View.OnClickListener() {
+        /*setOnClick(firstField,view);
+        setOnClick(secondField,view);
+        setOnClick(major,view);
+        setOnClick(minor,view);*/
+
+        holder.accNum.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-
-                //sends a Contact object, current index, names ArrayList, and boolean to the 2nd activity
-                /*Intent intent = new Intent(context, DetailedContactsActivity.class);
-                intent.putExtra("contact",contacts.get(currentPos));
-                intent.putExtra("index",currentPos);
-                intent.putExtra("existing",true);
-                intent.putExtra("nameList",names);
-
-                context.startActivity(intent);*/
+            public void onClick(View v) {
+                Intent intent = new Intent(context,ImageActivity.class);
+                context.startActivity(intent);
             }
         });
 

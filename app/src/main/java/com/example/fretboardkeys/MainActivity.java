@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     //initiates the recycler view with the array of names to be displayed
     private void initRecyclerView(){
         RecyclerView keyList = findViewById(R.id.recyclerview);
-        RecyclerAdapter adapter = new RecyclerAdapter(byMM);
+        RecyclerAdapter adapter = new RecyclerAdapter(byMM,this);
         keyList.setAdapter(adapter);
         keyList.setLayoutManager(new LinearLayoutManager(this));
     }
