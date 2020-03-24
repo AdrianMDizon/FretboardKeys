@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FretboardKeys</string>
+    <string name="num_placeholder">#</string>
+    <string name="sharps">Sharps</string>
+    <string name="flats">Flats</string>
+    <string name="key_placeholder">C</string>
+    <string name="Major">Major</string>
+    <string name="Minor">Minor</string>
+    <string name="numHead"># of #/b</string>
 </resources>
